@@ -1,5 +1,4 @@
 import './styles.css';
-import { ReactComponent as AvatarIcon } from '../../assets/red-icon.svg';
 
 type Props = {
   icon: React.ReactNode;
