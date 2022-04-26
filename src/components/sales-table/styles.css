@@ -11,6 +11,10 @@
   transition: background 0.3s;
 }
 
+.sales-table tbody td {
+  padding-left: 30px;
+}
+
 .sales-table tbody tr:nth-child(even) {
   background-color: var(--primary-color);
 }
@@ -27,6 +31,10 @@
   text-align: left;
   height: 55px;
   font-size: 16px;
+}
+
+.sales-table thead th:first-of-type {
+  padding-left: 30px;
 }
 
 .sales-table-container {
