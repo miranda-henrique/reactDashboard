@@ -4,12 +4,30 @@ import 'flatpickr/dist/themes/material_blue.css';
 import FlatPicker from 'react-flatpickr';
 import flatpickrlib from 'flatpickr';
 import { Portuguese } from 'flatpickr/dist/l10n/pt';
+import React, { useState } from 'react';
+import { FilterData, Gender } from '../../types';
 
 flatpickrlib.localize(Portuguese);
 
-function Filter() {
+type Props = {
+  onFilterChange: (filter: FilterData) => void;
+};
+
+function Filter({ onFilterChange }: Props) {
+  const [dates, setDate] = useState<Date[]>([]);
+  const [gender, setGender] = useState<Gender>();
+
   const onChangingDate = (dates: Date[]) => {
-    console.log({ dates });
+    if (dates.length === 2) {
+      setDate(dates);
+      onFilterChange({ dates: dates, gender: gender });
+    }
+  };
+
+  const onChangingGender = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedGender = event.target.value as Gender;
+    setGender(selectedGender);
+    onFilterChange({ dates: dates, gender: selectedGender });
   };
 
   return (
@@ -24,7 +42,7 @@ function Filter() {
         onChange={onChangingDate}
         placeholder="Selecione um período"
       />
-      <select className="filter-input">
+      <select className="filter-input" value={gender} onChange={onChangingGender}>
         <option value="">Selecione um gênero</option>
         <option value="MALE">Masculino</option>
         <option value="FEMALE">Feminino</option>
